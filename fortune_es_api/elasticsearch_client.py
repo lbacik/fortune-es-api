@@ -26,12 +26,12 @@ def create() -> None:
     logger.setLevel(logging.ERROR)
 
 
-def es_search(query: str) -> dict:
+def es_search(query: str, page: int, limit: int) -> dict:
     global es
     return es.search(
         index=os.getenv('INDEX_NAME'), 
         q=query,
-        size=200,
+        from_=page,
+        size=limit,
         default_operator='AND',
     )
-

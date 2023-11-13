@@ -9,10 +9,9 @@ api = APIRouter(
 
 
 @api.get("/")
-async def search(q: str) -> dict:
+async def search(q: str, limit: int = 10, page: int = 0) -> dict:
     try:
-        return es_search(q)
+        return es_search(q, page, limit)
     except Exception as e:
         logging.error(e)
         return {"error": "Something went wrong"}
-
