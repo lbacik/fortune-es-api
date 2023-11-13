@@ -28,10 +28,13 @@ def create() -> None:
 
 def es_search(query: str, page: int, limit: int) -> dict:
     global es
+
+    from_record: int = page * limit
+
     return es.search(
         index=os.getenv('INDEX_NAME'), 
         q=query,
-        from_=page,
+        from_=from_record,
         size=limit,
         default_operator='AND',
     )
